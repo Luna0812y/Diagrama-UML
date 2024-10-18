@@ -1,0 +1,22 @@
+@startuml
+scale 2
+left to right direction
+skinparam PackageStyle rect
+actor atendente
+actor gerente
+rectangle Blog {
+    custumer -- (LOja de CDs)
+    (Vender CDs) -- atendente
+    (Vender CDs) -- (A prazo)
+    (Vender CDs) -- (Á vista)
+    (A prazo) -- (Boleto)
+    (A prazo) -- (Cartão)
+    (Cartão).> (Calular Desconto): extend
+    (Á prazo).> (Calular Desconto): extend
+
+
+    (Administrar estoque) -- gerente
+    (Administrar estoque).> (login): include
+
+}
+@enduml
