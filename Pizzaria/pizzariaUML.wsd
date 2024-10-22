@@ -1,0 +1,30 @@
+@startuml
+scale 2
+left to right direction
+skinparam PackageStyle rect
+
+actor atendente
+actor cliente
+actor entregador
+
+rectangle Pizzaria {
+    (login) -- atendente
+    (validar pedido) -- atendente
+    (Aguardar validação).> (validar pedido): include
+
+    (fazer pedido) -- cliente
+    (fazer pedido).> (fazer cadastro): extend
+    (efetuar pagamento) -- cliente
+    (efetuar pagamento) -- (À vista/PIX)
+    (efetuar pagamento) -- (Cartão)
+    (efetuar pagamento).> (Aguardar validação): include
+    (Aguardar validação).> (Finalizado/Aguardar Entrega): include
+    (Aguardar validação).> (Erro): include
+    (avaliar serviço) -- cliente
+    
+    (receber chamado) -- entregador
+    (receber chamado).> (iniciar rota): include
+    (finalizar entrega) -- entregador
+    (login) -- entregador
+}
+@enduml

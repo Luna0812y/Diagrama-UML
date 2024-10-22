@@ -1,0 +1,24 @@
+@startuml
+scale 2
+left to right direction
+skinparam PackageStyle rect
+
+actor atendente  
+actor gerente 
+
+rectangle Loja {
+    (Vender CDs) -- atendente
+    (Vender CDs) -- (A prazo)
+    (Vender CDs) -- (À vista)
+    (A prazo) -- (Boleto)
+    (A prazo) -- (Cartão)
+    (Calcular Desconto).> (Cartão): extend
+    (Calcular Desconto).> (À vista): extend
+
+    (Administrar estoque) -- gerente
+    (Administrar estoque).> (Fazer login): include
+    (Vender CDs).> (Fazer login): include
+    gerente -- atendente
+}
+
+@enduml
